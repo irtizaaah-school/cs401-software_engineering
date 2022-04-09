@@ -3,47 +3,43 @@ import java.util.Vector;
 public class AllLogs{
 
     //MEMBER VARIABLES
-
     private Vector<SystemAdmin> allSystemAdmins;
     private Vector<Employee> allEmployees;
     private Vector<ChatLog> allChatLogs;
 
 
     //CONSTRUCTOR
-
     public AllLogs(Vector<SystemAdmin> allSystemAdmins, Vector<Employee> allEmployees, Vector<ChatLog> allChatLogs){
-            this.allSystemAdmins = allSystemAdmins;
-            this.allEmployees = allEmployees;
-            this.allChatLogs = allChatLogs;
+        this.allSystemAdmins = allSystemAdmins;
+        this.allEmployees = allEmployees;
+        this.allChatLogs = allChatLogs;
     }
 
     //SETTERS
-
     public void setAllSystemAdmins(Vector<SystemAdmin> allSystemAdmins){
-            this.allSystemAdmins = allSystemAdmins;
+        this.allSystemAdmins = allSystemAdmins;
     }
 
     public void setAllEmployees(Vector<Employee> allEmployees){
-            this.allEmployees = allEmployees;
+        this.allEmployees = allEmployees;
     }
 
     public void setAllChatLogs(Vector<ChatLog> allChatLogs){
-            this.allChatLogs = allChatLogs;
+        this.allChatLogs = allChatLogs;
     }
 
 
     //GETTERS
-
     public Vector<SystemAdmin> getAllSystemAdmins(){
-            return this.allSystemAdmins;
+        return this.allSystemAdmins;
     }
 
     public Vector<Employee> getAllEmployees(){
-            return this.allEmployees;
+        return this.allEmployees;
     }
 
     public Vector<ChatLog> getAllChatLogs(){
-            return this.allChatLogs;
+        return this.allChatLogs;
     }
 
     //METHODS
@@ -73,7 +69,7 @@ public class AllLogs{
     	if(removed == false)
     		System.out.println("Employee doesn't exist");
     };
-    
+
     public void addSystemAdmin(SystemAdmin newSystemAdmin)
     {
     	if(allSystemAdmins.contains(newSystemAdmin))
@@ -83,9 +79,9 @@ public class AllLogs{
     		allSystemAdmins.add(newSystemAdmin);
     		System.out.println("Added + " + newSystemAdmin.getUsername() + " allSystemAdmin");
     		}
-    
+
     };
-    
+
     public void removeSystemAdmin(String username)
     {
     	boolean removed = false;
@@ -101,4 +97,4 @@ public class AllLogs{
     	if(removed == false)
     		System.out.println("System Admin doesn't exist");
     };
-}
+} 
