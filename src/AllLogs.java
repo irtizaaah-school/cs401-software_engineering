@@ -3,43 +3,47 @@ import java.util.Vector;
 public class AllLogs{
 
     //MEMBER VARIABLES
+
     private Vector<SystemAdmin> allSystemAdmins;
     private Vector<Employee> allEmployees;
     private Vector<ChatLog> allChatLogs;
 
 
     //CONSTRUCTOR
+
     public AllLogs(Vector<SystemAdmin> allSystemAdmins, Vector<Employee> allEmployees, Vector<ChatLog> allChatLogs){
-        this.allSystemAdmins = allSystemAdmins;
-        this.allEmployees = allEmployees;
-        this.allChatLogs = allChatLogs;
+            this.allSystemAdmins = allSystemAdmins;
+            this.allEmployees = allEmployees;
+            this.allChatLogs = allChatLogs;
     }
 
     //SETTERS
+
     public void setAllSystemAdmins(Vector<SystemAdmin> allSystemAdmins){
-        this.allSystemAdmins = allSystemAdmins;
+            this.allSystemAdmins = allSystemAdmins;
     }
 
     public void setAllEmployees(Vector<Employee> allEmployees){
-        this.allEmployees = allEmployees;
+            this.allEmployees = allEmployees;
     }
 
     public void setAllChatLogs(Vector<ChatLog> allChatLogs){
-        this.allChatLogs = allChatLogs;
+            this.allChatLogs = allChatLogs;
     }
 
 
     //GETTERS
+
     public Vector<SystemAdmin> getAllSystemAdmins(){
-        return this.allSystemAdmins;
+            return this.allSystemAdmins;
     }
 
     public Vector<Employee> getAllEmployees(){
-        return this.allEmployees;
+            return this.allEmployees;
     }
 
     public Vector<ChatLog> getAllChatLogs(){
-        return this.allChatLogs;
+            return this.allChatLogs;
     }
 
     //METHODS
@@ -54,22 +58,6 @@ public class AllLogs{
     		allEmployees.add(newEmployee);
     };
 
-    public void removeEmployee(String username)
-    {
-    	boolean removed = false;
-    	for(int i = 0; i < allEmployees.size();i++)
-    	{
-    		if(allEmployees.get(i).getUsername().equals(username))//getusername().equals(username))
-	    		{
-    				allEmployees.remove(allEmployees.get(i));
-    				removed = true;
-    				System.out.println("Employee " + username + " removed sucessfully");
-    			}
-    	}
-    	if(removed == false)
-    		System.out.println("Employee doesn't exist");
-    };
-
     public void addSystemAdmin(SystemAdmin newSystemAdmin)
     {
     	if(allSystemAdmins.contains(newSystemAdmin))
@@ -79,22 +67,35 @@ public class AllLogs{
     		allSystemAdmins.add(newSystemAdmin);
     		System.out.println("Added + " + newSystemAdmin.getUsername() + " allSystemAdmin");
     		}
-
+    
     };
+    
 
+    public void removeEmployee(String username)
+    {
+    	for(int i = 0; i < allEmployees.size();i++)
+    	{
+    		if(allEmployees.get(i).getUsername().equals(username))//getusername().equals(username))
+	    		{
+    				allEmployees.remove(allEmployees.get(i));
+    				System.out.println("Employee " + username + " removed sucessfully");
+    				return;
+    			}
+    	}
+    	System.out.println("Employee doesn't exist");
+    };
+    
     public void removeSystemAdmin(String username)
     {
-    	boolean removed = false;
     	for(int i = 0; i < allSystemAdmins.size();i++)
     	{
     		if(allSystemAdmins.get(i).getUsername().equals(username))
 	    		{
     				allSystemAdmins.remove(allSystemAdmins.get(i));
-    				removed = true;
     				System.out.println("System Admin " + username + " removed sucessfully");
+    				return;
     			}
     	}
-    	if(removed == false)
-    		System.out.println("System Admin doesn't exist");
+    	System.out.println("System Admin doesn't exist");
     };
-} 
+}
