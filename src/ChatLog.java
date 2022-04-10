@@ -44,6 +44,6 @@ public class ChatLog{
         // MEMBER FUNCTIONS
 
         public void addMessage(Message message){
-
+                allMessages.add(message);
         }
 }
