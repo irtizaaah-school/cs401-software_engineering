@@ -50,5 +50,4 @@ public class SystemAdmin extends Employee
     {
         return allLogs.getAllChatLogs();
     } 
-
 }
