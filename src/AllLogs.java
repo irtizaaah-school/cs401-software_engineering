@@ -98,4 +98,10 @@ public class AllLogs{
     	}
     	System.out.println("System Admin doesn't exist");
     };
+    
+    public void updateChatLog(ChatLog log, Message message)
+    {
+    	int position = allChatLogs.indexOf(log);
+    	allChatLogs.get(position).addMessage(message);
+    }
 }
