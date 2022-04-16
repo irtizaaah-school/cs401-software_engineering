@@ -22,12 +22,16 @@ public class ChatLogUI {
 	private String chatLogName;
 	private int numOfMessages;
 	private ChatLog chatLog;
+
+	private String user;
+	private Message latestSentMessage;
 	
-	public ChatLogUI(ChatLog chatLog)
+	public ChatLogUI(ChatLog chatLog, String user)
 	{
 		this.chatLog = chatLog;
 		this.chatLogName = this.chatLog.getChatLogName();
 		this.numOfMessages = this.chatLog.getAllMessages().size();
+		this.user = user;
 		
 	}
 	
@@ -67,8 +71,7 @@ public class ChatLogUI {
 	    // SUBMIT BUTTON
 	    JButton sendButton = createButton("Send"); 
 	    sendButton.addActionListener((e)-> { 
-	    	System.out.print("Sent: " + "\"" + textBar.getText() + "\"\n");
-	    	textBar.setText("");
+	    	this.latestSentMessage = new Message(textBar.getText(), this.user);
 	    });
 				
 		JPanel bottomBar = createPanel(600, 50); 
