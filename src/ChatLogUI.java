@@ -72,6 +72,12 @@ public class ChatLogUI {
 	    JButton sendButton = createButton("Send"); 
 	    sendButton.addActionListener((e)-> { 
 	    	this.latestSentMessage = new Message(textBar.getText(), this.user);
+	    	if(textBar.getText().length() > 19) {
+	    		System.out.print("Message is too long (Can't exceed 19 characters).");
+	    	}
+	    	else {
+	    		System.out.print("Message sent.");
+	    	}
 	    });
 				
 		JPanel bottomBar = createPanel(600, 50); 
@@ -97,12 +103,12 @@ public class ChatLogUI {
 		JLabel messageContent = createLabel(content);
 		JLabel messageStatus = createLabel(status);
 		messageStatus.setFont(new Font("Courier", Font.ITALIC,13));
-		JLabel border = createLabel("------------------------------------------------------------------------");
+		//JLabel border = createLabel("------------------------------------------------------------------------");
 	
 		message.add(messageSender, BorderLayout.PAGE_START);
 		message.add(messageContent,  BorderLayout.CENTER);
 		message.add(messageStatus,  BorderLayout.LINE_END);
-		message.add(border,  BorderLayout.PAGE_END);
+		//message.add(border,  BorderLayout.PAGE_END);
 		message.setBackground(ChatColor.messageColor);
 		
 		return message;
