@@ -4,20 +4,20 @@ public class Message{
 
         //MEMBER VARIABLES
         private String content;
-        private Employee sender;
+        private String sender;
         private boolean isDelivered;
         private Vector<String> readBy;
 
 
         //CONSTRUCTOR
-        public Message(String content, Employee sender){
+        public Message(String content, String sender){
                 this.content = content;
                 this.sender = sender;
                 this.setIsDelivered(false);
         }
 
         //SETTERS
-        public void setSender(Employee sender){
+        public void setSender(String sender){
                 this.sender = sender;
         }
   
@@ -35,7 +35,7 @@ public class Message{
   
 
         //GETTERS
-        public Employee getSender(){
+        public String getSender(){
                 return this.sender;
         }
   
