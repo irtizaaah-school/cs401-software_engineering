@@ -33,7 +33,7 @@ public class Main {
 		
 		ChatLog chatLogData = new ChatLog("Accounting Department", allMembers);
 		chatLogData.setAllMessages(allMessages);
-		ChatLogUI chatLogComponent = new ChatLogUI(chatLogData);
+		ChatLogUI chatLogComponent = new ChatLogUI(chatLogData, "Jay Doe");
 		chatLogComponent.run();
 	}
 }
