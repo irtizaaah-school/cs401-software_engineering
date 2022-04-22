@@ -29,7 +29,7 @@ import javax.swing.border.LineBorder;
 
 public class ListUI {
 	
-	private Vector<SystemAdmin> allSystemAdmins;
+    private Vector<SystemAdmin> allSystemAdmins;
     private Vector<Employee> allEmployees;
     private Vector<ChatLog> userChatLogs;
     
