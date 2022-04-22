@@ -12,6 +12,7 @@ public class ChatLog{
         public ChatLog(String chatLogName, Vector<String> allMembers){
                 this.chatLogName = chatLogName;
                 this.allMembers = allMembers;
+                this.allMessages = new Vector<Message>();
         }
 
         //SETTERS
@@ -46,4 +47,11 @@ public class ChatLog{
         public void addMessage(Message message){
                 allMessages.add(message);
         }
+        
+    	
+    	public String toString()
+    	{
+    		return chatLogName;
+    		
+    	}
 }

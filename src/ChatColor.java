@@ -12,6 +12,8 @@ public class ChatColor {
 	public static Color scrollPaneColor = new Color(0x333C83);
 	public static Color scrollBarColor = new Color(0xF24A72);
 	public static Color messageColor = new Color(0x333C83);
+	public static Color isselectedColor = new Color(0xb8cfe5);
+	public static Color isselectedborderColor = new Color(0x6382bf);
 	public static Color getRandomColor() {
 	    Random rand = new Random();
 	    Vector<Integer> givenList = new Vector();
