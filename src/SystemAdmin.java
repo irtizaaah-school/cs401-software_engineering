@@ -7,7 +7,7 @@ public class SystemAdmin extends Employee
     {
         super(username, password);
         this.setIsLoggedIn(false);
-        super.setIsSystemAdmin(true);
+        super.isSystemAdmin = true;
     }
 
     //MEMBER FUNCTIONS

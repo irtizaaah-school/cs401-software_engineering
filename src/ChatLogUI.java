@@ -58,6 +58,8 @@ public class ChatLogUI {
 			}
 			JPanel message = createMessage(sender, content, status, ChatColor.getRandomColor());
 			messageContainer.add(message);
+
+
 		}
 		
 		JScrollPane messageScrollContainer = createScrollPane(messageContainer,100,10);
@@ -78,6 +80,7 @@ public class ChatLogUI {
 	    	else {
 	    		System.out.print("Message sent.");
 	    	}
+	    	
 	    });
 				
 		JPanel bottomBar = createPanel(600, 50); 
@@ -91,6 +94,7 @@ public class ChatLogUI {
 		frame.add(messageScrollContainer, BorderLayout.CENTER);
 		frame.add(bottomBar, BorderLayout.PAGE_END);
 		frame.setVisible(true);
+		
 	
 	}
 

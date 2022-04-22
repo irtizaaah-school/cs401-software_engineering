@@ -13,7 +13,7 @@ public class Employee{
 		this.username = username;
 		this.password = password;
 		isLoggedIn = false;
-		//isSystemAdmin = false;
+		isSystemAdmin = false;
 		
 	}
 	
@@ -78,7 +78,11 @@ public class Employee{
 	}
 	
 	
-	
+	public String toString()
+	{
+		return username;
+		
+	}
 	
 	public boolean verifyEmployee(String username, String password) {
 		if(this.username.equals(username) && this.password.equals(password)) {
@@ -123,7 +127,8 @@ public class Employee{
 		//send message part still pending.
 		
 	}
-	
+
+
 	
 	
 	
