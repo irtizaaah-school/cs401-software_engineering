@@ -61,10 +61,9 @@ public class SettingsWindow extends JFrame implements ActionListener
 		}
 		else if(e.getSource() == viewMessagesButton)
 		{
-			System.out.println("calls ListUI");
-			//this.dispose();
-			//ListUI listUI = new ListUI(Vector<SystemAdmin> admins, Vector<Employee> employees, Vector<ChatLog> logs);
-			//listUI.run();
+			this.dispose();
+			ListUI listUI = new ListUI(Vector<SystemAdmin> admins, Vector<Employee> employees, Vector<ChatLog> logs);
+			listUI.run();
 		}
 	}
 }
