@@ -6,6 +6,7 @@ public class Employee implements Serializable{
 	private String username;
 	private String password;
 	private boolean isSystemAdmin;
+	private boolean isOnline;
 
 	//CONSTRUCTOR
 	public Employee(){
@@ -32,6 +33,10 @@ public class Employee implements Serializable{
   	public void setIsSystemAdmin(boolean isSystemAdmin){
   		this.isSystemAdmin = isSystemAdmin;
   	}
+  	
+  	public void setIsOnline(boolean isOnline){
+  		this.isOnline = isOnline;
+  	}
   
 
 	//GETTERS
@@ -45,6 +50,10 @@ public class Employee implements Serializable{
   
   	public boolean getIsSystemAdmin(){
   		return this.isSystemAdmin;
+  	}
+  	
+  	public boolean getIsOnline(){
+  		return this.isOnline;
   	}
     
     // MEMBER FUNCTIONS
