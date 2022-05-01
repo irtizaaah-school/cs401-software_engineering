@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -9,12 +10,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -29,69 +33,150 @@ import javax.swing.border.LineBorder;
 
 public class ListUI {
 	
-    private Vector<SystemAdmin> allSystemAdmins;
-    private Vector<Employee> allEmployees;
-    private Vector<ChatLog> userChatLogs;
+    protected Vector<Employee> allEmployees;
+    protected Vector<ChatLog> userChatLogs;
     
+    JFrame frame;
     
-    public ListUI(Vector<SystemAdmin> admins, Vector<Employee> employees, Vector<ChatLog> logs)
+    public ListUI(Vector<Employee> employees, Vector<ChatLog> logs)
     {
-    	allSystemAdmins = admins;
     	allEmployees = employees;
     	userChatLogs = logs;
     }  
- 
+    
+    public ListUI(Vector<Employee> employees)
+    {
+    	allEmployees = employees;
+    	userChatLogs = new Vector<ChatLog>();
+    }  
+    
 	public void run()
 	{
+		//Initialize users
+		DefaultListModel<Employee> users = new DefaultListModel<Employee>();
+		updateuser(users);
+		JList userlist = new JList(users);
+		setleftrender(userlist);
+		JScrollPane userspane = new JScrollPane(userlist);
+		userspane.setViewportView(userlist);
+		
+		//Initialize chatlogs
+		DefaultListModel<ChatLog> logs = new DefaultListModel<>();
+		
+		if(!userChatLogs.isEmpty())
+		{
+			for(int i = 0; i < userChatLogs.size();i++)
+			{
+				logs.add(i, userChatLogs.get(i));
+			}
+		}
+		
+		JList chatlist = new JList(logs);
+		setrightrender(chatlist);
+		JScrollPane chatlogpane = new JScrollPane();
+		chatlogpane.setViewportView(chatlist);
+		
 
-	  JFrame frame = createframe();
-	  
-      JScrollPane users = new JScrollPane(createuserJlist());     
-      JScrollPane logs = new JScrollPane(createchatlogJlist());
-      setbackgroundcolor(users,logs);
-      
-      users.setSize(new Dimension(900,200));
-      frame.setLayout(new BoxLayout(frame.getContentPane(),BoxLayout.X_AXIS));
-      frame.add(users);
-      frame.add(logs);
-      frame.setVisible(true);
-      
+		//Create Frame and display
+		frame = createui(userspane,chatlogpane,"+"); //JFrame
+		frame.setVisible(true);
    }
-   
-   private void setbackgroundcolor(JScrollPane user, JScrollPane log)
-   {
-	   user.getViewport().getView().setBackground(ChatColor.panelColor);
-	   log.getViewport().getView().setBackground(ChatColor.panelColor);
-   }
-   
-   private static JFrame createframe() 
+	
+	//Update users to UI
+	protected void updateuser(DefaultListModel<Employee> users)
+	{
+		users.removeAllElements();
+		Vector<Employee> tempusers = allEmployees;
+		if(!tempusers.isEmpty())
+		{
+			Collections.sort(tempusers,Comparator.comparing(Employee::getIsOnline).reversed().thenComparing(Employee::getUsername));     
+		    for(int i = 0; i < tempusers.size();i++)
+		    	users.add(i,tempusers.get(i));
+		}
+	}
+	
+	// Create UI Elements
+	protected JFrame createui(JScrollPane list1, JScrollPane list2,String buttonname)
+	{
+		JFrame frame = createframe();
+		  
+
+	    setbackgroundcolor(list1,list2);
+	      
+	    list1.setSize(new Dimension(900,200));
+	    
+	    JPanel masterpanel = new JPanel();
+	    masterpanel.setLayout(new BoxLayout(masterpanel,BoxLayout.Y_AXIS));
+	      
+	    JPanel top = createPanel(900,600);
+	    top.setLayout(new BoxLayout(top,BoxLayout.X_AXIS));
+	    top.add(list1);
+	    top.add(list2);
+	    
+	    JPanel bottom = createPanel(900,40);
+	    JButton createchat = createButton(buttonname); 
+	    buttonlistener(createchat);
+	    
+	    bottom.setBackground(ChatColor.panelColor);
+	    bottom.add(createchat,BorderLayout.SOUTH);
+	      
+	    masterpanel.add(top);
+	    masterpanel.add(bottom);
+	    
+	    frame.setLayout(new BoxLayout(frame.getContentPane(),BoxLayout.Y_AXIS));
+	    frame.add(masterpanel);
+	    
+		return frame;
+	}
+	
+	
+
+
+	protected JPanel createPanel(int width, int height){
+		JPanel panel = new JPanel(); 
+		panel.setBackground(ChatColor.panelColor);
+		panel.setMaximumSize(new Dimension(width, height));
+		panel.setLayout(new FlowLayout());
+	
+		return panel;
+	}
+	
+	protected JButton createButton(String name){
+		JButton button = new JButton(name); 
+		button.setPreferredSize(new Dimension(80, 25));
+		button.setBackground(ChatColor.buttonColor);
+		button.setOpaque(true);
+		Border buttonBorder = BorderFactory.createLineBorder(ChatColor.buttonColor, 1);
+		button.setBorder(buttonBorder);
+		button.setForeground(ChatColor.textColor);
+	
+		return button;
+	}
+	
+
+   protected static JFrame createframe() 
    {      
 		   JFrame frame = new JFrame("Users and ChatLogs");
 	   	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		   frame.setSize(900, 600);      
 		   
-		   frame.setLocationRelativeTo(null);  // Center on screen
+		   frame.setLocationRelativeTo(null);  
 		   frame.setResizable(false);
-		   frame.setVisible(true);	// make visible
-		   return frame;
-		   
+		   return frame; 
    }
-   
-   private Vector<Employee> createusers()
-   {
-	   Vector<Employee> users = allEmployees;
-	   users.addAll(allSystemAdmins);
-	   Collections.sort(users,Comparator.comparing(Employee::getIsLoggedIn).reversed().thenComparing(Employee::getUsername));  
-	   return users;
-   }	   
-   
+      
+	protected void setbackgroundcolor(JScrollPane user, JScrollPane log)
+	{
+		user.getViewport().getView().setBackground(ChatColor.panelColor);
+		log.getViewport().getView().setBackground(ChatColor.panelColor);
+	}
+	   
+   //Listeners
    @SuppressWarnings({ "unchecked", "serial", "unused", "rawtypes" })
    
-   private JList createchatlogJlist()
+   protected void addrightlistener(JList list)
    {
-	   JList userchatlog = new JList(userChatLogs);
-	   userchatlog.addMouseListener(new MouseAdapter() 
+	   list.addMouseListener(new MouseAdapter() 
 	   {
 	          public void mouseClicked(MouseEvent evt) 
 	          {
@@ -103,15 +188,36 @@ public class ListUI {
 	              }
 	          }
 	   });
-	   
-	   userchatlog.setCellRenderer(new DefaultListCellRenderer() 
+   }
+ 
+   protected void buttonlistener(JButton button)//,JFrame frame)
+   {
+	   button.addActionListener(new ActionListener()
+	   {
+		   public void actionPerformed(ActionEvent e)
+		   {
+		      
+			   CreateLogUI createlog = new CreateLogUI(allEmployees,userChatLogs);//,thelog.getAllChatLogs());
+		       frame.dispose();
+		       createlog.run();
+
+		       //frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+		    }
+		});
+	}
+   
+   //Sets UI Renders, needed to change colors
+   @SuppressWarnings({ "rawtypes", "unchecked", "serial" })
+   protected void setrightrender(JList list)
+   {
+	   list.setCellRenderer(new DefaultListCellRenderer() 
 	   {
 
 	          @Override
 	          public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) 
 	          {
 	        	  ChatLog log = (ChatLog) value;
-	              setText(log.getChatLogName());
+	              setText(log.getName());
 	              setForeground(Color.WHITE);  
 	              if (isSelected) 
 	              {
@@ -126,56 +232,34 @@ public class ListUI {
 	              return this;
 	          }
 
-	    });
-	   
-	   return userchatlog;
-	   
+	    });   
    }
-   
+ 
    @SuppressWarnings({ "unchecked", "serial", "unused", "rawtypes" })
    
-   private JList createuserJlist()
+   protected void setleftrender(JList list)
    {
-	   JList users = new JList(createusers());
-	   users.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);   
-	      users.addMouseListener(new MouseAdapter() {
-	          public void mouseClicked(MouseEvent evt) {
-	              JList list = (JList)evt.getSource();
-	              if (evt.getClickCount() == 2) {
-	            	  System.out.println(list.getSelectedValue().toString());
-	              }
-	             }
-	      });
-	      users.setCellRenderer(new DefaultListCellRenderer() {
+	   list.setCellRenderer(new DefaultListCellRenderer() {
 
 	          @Override
 	          public Component getListCellRendererComponent(JList list, Object value, int index,
 	                    boolean isSelected, boolean cellHasFocus) {
 	        	  
-	               if (value instanceof Employee || value instanceof SystemAdmin) {
+	               if (value instanceof Employee) {
 	            	   Employee user = (Employee) value;
 	                    setText(user.getUsername());
 	                   
-	                    if (user.getIsLoggedIn() == true) {
+	                    if (user.getIsOnline() == true) {
 	                    	setForeground(Color.GREEN);
-	                    } else {
+	                    } else
 	                         setForeground(Color.RED);
-	                    }
-	                    if (isSelected) {
-	                         setBackground(ChatColor.isselectedColor);
-	                         setBorder(new LineBorder(ChatColor.isselectedborderColor, 1, true));
-	                    }
-	                    else
-	                    {
-	                    	setBackground(ChatColor.panelColor);
-	                    	setBorder(null);
-	                    }
+	                   
+	                    setBackground(ChatColor.panelColor);
+	                    setBorder(null);
 	               }
 	               return this;
 	          }
 
 	     });
-	   
-	   return users;
    }
 }
