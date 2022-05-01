@@ -13,12 +13,14 @@ public class Employee implements Serializable{
 		this.setUsername("NONE");
 		this.setPassword("NONE");
 		this.setIsSystemAdmin(false);
+		this.setIsOnline(false);
 	}
 
 	public Employee(String username, String password, boolean isSystemAdmin){
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setIsSystemAdmin(isSystemAdmin);
+		this.setIsOnline(false);
 	}
 
 	//SETTERS
@@ -59,6 +61,7 @@ public class Employee implements Serializable{
     // MEMBER FUNCTIONS
     public boolean validate( String password){ // check if password arg matches stored password
         if(password.equals(this.password)){
+        	this.setIsOnline(true);
 			return true;
 		}
 		return false;
