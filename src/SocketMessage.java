@@ -111,6 +111,7 @@ public class SocketMessage implements Serializable{
         System.out.println("\tusername: " + this.employee.getUsername());
         System.out.println("\tpassword: " + this.employee.getPassword());
         System.out.println("\tisSystemAdmin: " + this.employee.getIsSystemAdmin());
+        System.out.println("\tisOnline: " + this.employee.getIsOnline());
 
         System.out.println("message: ");
         System.out.println("\tsender: " + this.message.getSender());
