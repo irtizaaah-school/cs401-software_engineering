@@ -63,8 +63,8 @@ public class ChatUI {
 		JButton refreshButton = ChatAppUI.createButton("Refresh");
 		refreshButton.setBorder(buttonBorder);
 		refreshButton.addActionListener((e)-> { 
-			chatFrame.dispose();
 			ChatUI chatUI = new ChatUI(this.client);
+			chatFrame.dispose();
 			chatUI.run();
 		});
 		
