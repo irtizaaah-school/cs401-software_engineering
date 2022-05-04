@@ -75,22 +75,19 @@ public class CreateLogUI{
 	// Create UI Elements
 	protected JFrame createui(JScrollPane list1, JScrollPane list2,String buttonname)
 	{
-		JFrame frame = createframe();
-		  
-
-	    setbackgroundcolor(list1,list2);
+		JFrame frame = ChatAppUI.createFrame(900,600,"Create Group");//JFrame frame = createframe();
 	      
 	    //list1.setSize(new Dimension(900,200));
 	    
 	    JPanel masterpanel = new JPanel();
 	    masterpanel.setLayout(new BoxLayout(masterpanel,BoxLayout.Y_AXIS));
 	      
-	    JPanel top = createPanel(900,600);
+	    JPanel top = ChatAppUI.createPanel(900, 600);//createPanel(900,600);
 	    top.setLayout(new BoxLayout(top,BoxLayout.X_AXIS));
 	    top.add(list1);
 	    top.add(list2);
 	    
-	    JPanel bottom = createPanel(900,40);
+	    JPanel bottom = ChatAppUI.createPanel(900, 40);//createPanel(900,40);
 	    
 	    // Create Button and add listener
 	    JButton createchat = ChatAppUI.createButton(buttonname); 
@@ -108,50 +105,7 @@ public class CreateLogUI{
 		return frame;
 	}
 	
-	
-	protected static JFrame createframe() 
-	{      
-		JFrame frame = new JFrame("Create New Chat");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(900, 600);      
-			   
-		frame.setLocationRelativeTo(null);  
-		frame.setResizable(false);
-		return frame;			   
-	}
-	
-	protected JPanel createPanel(int width, int height){
-		JPanel panel = new JPanel(); 
-		panel.setBackground(ChatAppUI.panelColor);
-		panel.setMaximumSize(new Dimension(width, height));
-		panel.setLayout(new FlowLayout());
-	
-		return panel;
-	}
-	
-	protected JButton createButton(String name){
-		JButton button = new JButton(name); 
-		button.setPreferredSize(new Dimension(80, 25));
-		button.setBackground(ChatAppUI.buttonColor);
-		button.setOpaque(true);
-		Border buttonBorder = BorderFactory.createLineBorder(ChatAppUI.buttonColor, 1);
-		button.setBorder(buttonBorder);
-		button.setForeground(ChatAppUI.textColor);
-	
-		return button;
-	}
-	
-	//Changes background colors
-	protected void setbackgroundcolor(JScrollPane user, JScrollPane log)
-	{
-	   user.getViewport().getView().setBackground(ChatAppUI.panelColor);
-	   log.getViewport().getView().setBackground(ChatAppUI.panelColor);
-	}
-   
 
-	
-	
-	
 	//Listeners
  @SuppressWarnings({ "unchecked", "serial", "unused", "rawtypes" })
 	 
