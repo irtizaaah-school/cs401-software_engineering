@@ -186,7 +186,7 @@ public class ChatUI {
                 	}
                 	
                 	scrollableMessagesContainer = ChatAppUI.createScrollableMessagesContainer(messages);
-            		System.out.println("chatLog Pressed: " + this.currentChatLogName);
+            		//System.out.println("chatLog Pressed: " + this.currentChatLogName);
             		
             		chatFrame.add(scrollableMessagesContainer, BorderLayout.CENTER);
             		chatFrame.setVisible(true);

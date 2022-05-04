@@ -67,7 +67,7 @@ public class Client {
 			e.printStackTrace();
 		}
 		
-		print("sent", socketMessage);
+		//print("sent", socketMessage);
 	}
 	
 	public SocketMessage receive() {
@@ -81,7 +81,7 @@ public class Client {
 			e.printStackTrace();
 		}
 		
-		print("received", returnMessage);
+		//print("received", returnMessage);
 		
 		return returnMessage;
 	}
