@@ -50,8 +50,8 @@ public class ViewLogs {
 		}
 		
 		JList chatlist = new JList(logs);
-		setrightrender(chatlist);
-		addrightlistener(chatlist);
+		setrender(chatlist);
+		addlistener(chatlist);
 		JScrollPane chatlogpane = new JScrollPane();
 		chatlogpane.setViewportView(chatlist);
 		
@@ -121,7 +121,7 @@ public class ViewLogs {
 
    protected static JFrame createframe() 
    {      
-		   JFrame frame = new JFrame("Users and ChatLogs");
+		   JFrame frame = new JFrame("ChatLogs");
 	   	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		   frame.setSize(900, 600);      
 		   
@@ -139,7 +139,7 @@ public class ViewLogs {
    //Listeners
    @SuppressWarnings({ "unchecked", "serial", "unused", "rawtypes" })
    
-   protected void addrightlistener(JList list)
+   protected void addlistener(JList list)
    {
 	   list.addMouseListener(new MouseAdapter() 
 	   {
@@ -184,7 +184,7 @@ public class ViewLogs {
    
    //Sets UI Renders, needed to change colors
    @SuppressWarnings({ "rawtypes", "unchecked", "serial" })
-   protected void setrightrender(JList list)
+   protected void setrender(JList list)
    {
 	   list.setCellRenderer(new DefaultListCellRenderer() 
 	   {
