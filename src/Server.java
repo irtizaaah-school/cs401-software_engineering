@@ -145,7 +145,7 @@ public class Server {
 				e.printStackTrace();
 			}
 			
-			print("sent", socketMessage);
+			//print("sent", socketMessage);
 		}
 		
 		public SocketMessage receive() {
@@ -154,15 +154,15 @@ public class Server {
 			try {
 				returnMessage = (SocketMessage) objectInputStream.readObject();
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				isSessionExpired = true;
 				
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				isSessionExpired = true;
 			}
 			
-			print("received", returnMessage);
+			//print("received", returnMessage);
 			
 			return returnMessage;
 		}
